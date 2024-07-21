@@ -1,10 +1,10 @@
 from marshmallow import Schema, fields
 
-
 class RegisterRequest(Schema):
-    user_login_id = fields.String(required=True)
-    user_mail = fields.String(required=True)
-    user_names = fields.String(required=True)
-    user_lastnames = fields.String(required=True)
-    user_password = fields.String(required=True)
-    
+    usuario = fields.String(required=True)
+    nombres = fields.String(required=True)
+    apellidos = fields.String(required=True)
+    correo_electronico = fields.String(required=True)
+    contrasena = fields.String(required=True)
+    rol = fields.String()  # Opcional, por defecto 'usuario'
+    universidad = fields.String()  # Opcional

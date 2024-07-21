@@ -1,10 +1,9 @@
 from src.utils.general.logs import HandleLogs
-from src.utils.general.response import response_error, response_success, response_not_found
+from src.utils.general.response import response_error, response_success
 from src.api.Components.register_component import RegisterComponent
 from src.api.Model.Request.register_request import RegisterRequest
 from flask import request
 from flask_restful import Resource
-
 
 class RegisterService(Resource):
     @staticmethod
@@ -27,6 +26,3 @@ class RegisterService(Resource):
         except Exception as err:
             HandleLogs.write_error(err)
             return response_error("Error en el método: " + err.__str__())
-
-
-
