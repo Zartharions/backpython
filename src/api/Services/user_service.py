@@ -1,9 +1,8 @@
-from src.utils.general.logs import HandleLogs
-from src.utils.general.response import response_error, response_success, response_not_found
-from src.api.Components.user_component import UserComponent
-from flask import request
 from flask_restful import Resource
 
+from ..Components.user_component import UserComponent
+from ...utils.general.logs import HandleLogs
+from ...utils.general.response import response_error, response_success, response_not_found
 
 class UserService(Resource):
     @staticmethod
