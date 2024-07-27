@@ -6,19 +6,18 @@ from ..Services.user_service import UserService
 from src.api.Services.grupo_service import GrupoService
 from src.api.Services.listar_materia_service import ListarMateriaId
 
-
 def load_routes(api):
-    #metodo para el login
+    # Método para el login
     api.add_resource(LoginService, '/forum/login')
-    #metodo para listar los usuarios
+    # Método para registrar usuarios
     api.add_resource(RegisterService, '/forum/register')
-    #metodo para actualizar un usuario
-    api.add_resource(UpdateService, '/segu/update')
+    # Método para actualizar un usuario
+    api.add_resource(UpdateService, '/forum/update')
     # Método para eliminar un usuario
-    api.add_resource(DeleteService, '/segu/delete_user')
-    # Método para ver los usuarios
+    api.add_resource(DeleteService, '/usuarios/delete_user')
+    # Método para listar usuarios
     api.add_resource(UserService, '/user/list')
-    # Método para agregar una materia
+    # Método para agregar un grupo
     api.add_resource(GrupoService, '/forum/create')
     # Método para obtener una materia por ID
     api.add_resource(ListarMateriaId, '/materia/get')

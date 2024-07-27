@@ -13,7 +13,7 @@ class RegisterComponent:
 
             # Consulta SQL adaptada a la nueva estructura de la tabla Usuarios
             sql = """
-                INSERT INTO Usuarios (usuario, nombres, apellidos, correo_electronico, contrasena, estado, rol, universidad)
+                INSERT INTO Projectg2.Usuarios (usuario, nombres, apellidos, correo_electronico, contrasena, estado, rol, universidad)
                 VALUES (%s, %s, %s, %s, %s, TRUE, %s, %s)
             """
 

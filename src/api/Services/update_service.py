@@ -18,10 +18,11 @@ class UpdateService(Resource):
                 return response_error("Error al validar el request -> " + str(error_en_validacion))
 
             resultado = UpdateComponent.update_user(
-                rq_json['user_login_id'],
-                rq_json['user_names'],
-                rq_json['user_mail'],
-                rq_json['user_password']
+                rq_json['id_usuario'],
+                rq_json.get('usuario'),
+                rq_json.get('universidad'),
+                rq_json['contrasena_actual'],
+                rq_json.get('nueva_contrasena')
             )
 
             if resultado['result']:
@@ -31,4 +32,4 @@ class UpdateService(Resource):
 
         except Exception as err:
             HandleLogs.write_error(err)
-            return response_error("Error en el método: " + err.__str__())
+            return response_error("Error en el método: " + str(err))
