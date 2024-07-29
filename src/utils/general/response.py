@@ -1,3 +1,4 @@
+# src/utils/general/response.py
 
 def response_inserted(datos):
     return {
@@ -31,7 +32,6 @@ def response_error(mensaje):
         'status_code': 500,
     }, 500
 
-
 def response_unauthorize():
     return {
         'result': False,
@@ -39,7 +39,6 @@ def response_unauthorize():
         'data': {},
         'status_code': 401,
     }, 401
-
 
 def internal_response(result, datos, mensaje):
     return {

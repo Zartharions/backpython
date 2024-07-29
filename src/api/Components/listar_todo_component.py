@@ -2,32 +2,29 @@ from ...utils.general.logs import HandleLogs
 from ...utils.general.response import internal_response
 from ...utils.database.connection_db import DataBaseHandle
 
-class MateriaComponent:
+class GrupoTComponent:
 
     @staticmethod
-    def listar_materia(materia_id):
+    def listar_grupos():
         try:
             result = False
             data = None
             message = None
 
             sql_select = """
-                SELECT id, nombre_materia, descripcion, rama_general, estado, num_creditos
-                FROM materias
-                WHERE id = %s
+                SELECT nombre_grupo
+                FROM Projectg2.Grupos
             """
 
-            record = (materia_id,)
-
-            select_result = DataBaseHandle.getRecords(sql_select, 1, record)
+            select_result = DataBaseHandle.getRecords(sql_select, 0)
 
             if select_result['result']:
                 if select_result['data']:
                     result = True
-                    data = select_result['data']
-                    message = 'Materia encontrada'
+                    data = [record['nombre_grupo'] for record in select_result['data']]
+                    message = 'Grupos encontrados'
                 else:
-                    message = 'Materia no encontrada'
+                    message = 'No hay grupos registrados'
             else:
                 message = select_result['message']
 

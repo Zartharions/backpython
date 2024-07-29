@@ -14,11 +14,11 @@ def conn_db():
                             database=Parametros.db_name,
                             cursor_factory=RealDictCursor)
 
+
 class DataBaseHandle:
-    #Nuestros Metodos para ejecutar sentencias.
-    #ejecuta metodos de tipo select
+
     @staticmethod
-    def getRecords(query,  tamanio, record=()):
+    def getRecords(query, tamanio, record=()):
         try:
             result = False
             message = None
@@ -30,7 +30,7 @@ class DataBaseHandle:
                 cursor.execute(query)
             else:
                 cursor.execute(query, record)
-            # tamanio es 0 todos, 1 solo uno, > 1 n registros
+
             if tamanio == 0:
                 res = cursor.fetchall()
             elif tamanio == 1:
@@ -42,14 +42,12 @@ class DataBaseHandle:
             result = True
         except Exception as ex:
             HandleLogs.write_error(ex)
-            message = ex.__str__()
+            message = str(ex)
         finally:
             cursor.close()
             conn.close()
             return internal_response(result, data, message)
 
-    #ejecuta metodos de tipo INSERT-UPDATE-DELETE
-    #prueba de push jenkins
     @staticmethod
     def ExecuteNonQuery(query, record):
         try:
@@ -63,21 +61,19 @@ class DataBaseHandle:
             else:
                 cursor.execute(query, record)
 
-            if query.find('INSERT') > -1:
-                cursor.execute('SELECT LASTVAL()')
-                ult_id = cursor.fetchone()['lastval']
+            if query.strip().upper().startswith('INSERT') and 'RETURNING' in query.upper():
+                res = cursor.fetchone()
+                data = res['id_grupo'] if res and 'id_grupo' in res else None
                 conn.commit()
-                data = ult_id
             else:
-                data = 0
+                conn.commit()
+                data = cursor.rowcount  # Número de filas afectadas
+
             result = True
         except Exception as ex:
             HandleLogs.write_error(ex)
-            message = ex.__str__()
+            message = str(ex)
         finally:
             cursor.close()
             conn.close()
             return internal_response(result, data, message)
-
-
-

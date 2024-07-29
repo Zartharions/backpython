@@ -7,4 +7,4 @@ class RegisterRequest(Schema):
     correo_electronico = fields.String(required=True)
     contrasena = fields.String(required=True)
     rol = fields.String()  # Opcional, por defecto 'usuario'
-    universidad = fields.String()  # Opcional
+    universidad = fields.String(required=True)  # Opcional
