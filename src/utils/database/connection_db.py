@@ -49,6 +49,7 @@ class DataBaseHandle:
             return internal_response(result, data, message)
 
     #ejecuta metodos de tipo INSERT-UPDATE-DELETE
+    #prueba de push jenkins
     @staticmethod
     def ExecuteNonQuery(query, record):
         try:
