@@ -77,3 +77,36 @@ class DataBaseHandle:
             cursor.close()
             conn.close()
             return internal_response(result, data, message)
+
+    @staticmethod
+    def execute(query, params):
+        try:
+            # Establecer conexión a la base de datos
+            connection = conn_db()
+            cursor = connection.cursor()
+
+            # Ejecutar la consulta
+            cursor.execute(query, params)
+            connection.commit()
+
+            # Cerrar conexión
+            cursor.close()
+            connection.close()
+
+            return {"result": True, "data": None}
+        except Exception as e:
+            return {"result": False, "message": str(e)}
+
+    @staticmethod
+    def executeUpdate(sql, params):
+        try:
+            connection = conn_db()  # Asume que `get_connection` obtiene la conexión a la base de datos
+            cursor = connection.cursor()
+            cursor.execute(sql, params)
+            connection.commit()
+            return {'result': True, 'data': cursor.rowcount}
+        except Exception as e:
+            return {'result': False, 'message': str(e)}
+        finally:
+            cursor.close()
+            connection.close()

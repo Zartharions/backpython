@@ -12,7 +12,7 @@ class GrupoTComponent:
             message = None
 
             sql_select = """
-                SELECT nombre_grupo
+                SELECT nombre_grupo, descripcion
                 FROM Projectg2.Grupos
             """
 
@@ -21,7 +21,7 @@ class GrupoTComponent:
             if select_result['result']:
                 if select_result['data']:
                     result = True
-                    data = [record['nombre_grupo'] for record in select_result['data']]
+                    data = [{'nombre_grupo': record['nombre_grupo'], 'descripcion': record['descripcion']} for record in select_result['data']]
                     message = 'Grupos encontrados'
                 else:
                     message = 'No hay grupos registrados'

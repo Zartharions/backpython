@@ -5,10 +5,12 @@ from src.api.Model.Request.grupo_request import GrupoRequest
 from flask import request
 from flask_restful import Resource
 
+
 class GrupoService(Resource):
     @staticmethod
     def post():
         try:
+
             HandleLogs.write_log("Ejecutando servicio para crear grupo")
             rq_json = request.get_json()
             new_request = GrupoRequest()
